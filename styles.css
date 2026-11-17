@@ -130,3 +130,28 @@
 }
 @media(max-width:390px){.trust-grid{grid-template-columns:1fr}.trust-item,.trust-item:first-child,.trust-item:nth-child(even){min-height:auto;padding:15px 17px}.nav-cta{font-size:12px!important;padding:11px 12px!important}}
 @media(prefers-reduced-motion:reduce){.hero-art .floating-chip{animation:none}.pg-scroll-reveal{opacity:1;transform:none;transition:none}.nav-cta,.btn-yellow{transition:none!important}}
+
+/* Dinamismo leve v3: microinterações visíveis sem bibliotecas ou animação de imagens pesadas */
+.pg-read-progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:99999;pointer-events:none;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#ffcc40,#ef7aab,#55bcb6);box-shadow:0 1px 5px #16365a22}
+/* O botão do cabeçalho respira discretamente e ganha um pequeno reflexo */
+.nav-cta{position:relative;overflow:hidden;isolation:isolate;animation:pg-cta-breathe 3.8s ease-in-out infinite}
+.nav-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 22%,rgba(255,255,255,.42) 47%,transparent 68%);transform:translateX(-160%);animation:pg-cta-sheen 5.8s ease-in-out infinite}
+@keyframes pg-cta-breathe{0%,100%{box-shadow:0 5px 0 #e8b82c,0 9px 18px #d49d1530}50%{box-shadow:0 5px 0 #e8b82c,0 12px 30px #d49d1560}}
+@keyframes pg-cta-sheen{0%,65%{transform:translateX(-160%)}85%,100%{transform:translateX(160%)}}
+/* A palavra colorida tem vida sem perder a leitura */
+.hero .rainbow-text{background-size:180% 180%;animation:pg-color-drift 9s ease-in-out infinite}
+@keyframes pg-color-drift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+/* Os cards entram em pequenas ondas quando aparecem na tela */
+.trust-item.pg-visible,.audience-card.pg-visible,.topic-card.pg-visible,.age-card.pg-visible,.preview-card.pg-visible,.routine-card.pg-visible{animation:pg-card-enter .65s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--pg-stagger,0ms)}
+@keyframes pg-card-enter{from{opacity:.65;transform:translateY(17px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* O destaque da professora e a oferta recebem movimento pontual, não contínuo */
+.early-proof-card.pg-visible{animation:pg-proof-enter .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pg-proof-enter{from{opacity:.5;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-purchase,.mid-offer{position:relative;isolation:isolate}
+.hero-purchase::before,.mid-offer::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;border:1px solid rgba(255,210,78,.0);animation:pg-offer-edge 6s ease-in-out infinite}
+@keyframes pg-offer-edge{0%,100%{border-color:rgba(255,210,78,0)}40%,55%{border-color:rgba(255,210,78,.75)}}
+/* Ícones e etiquetas reagem à entrada da seção */
+.trust-item.pg-visible .trust-icon,.audience-card.pg-visible>span{animation:pg-icon-pop .6s ease-out both;animation-delay:calc(var(--pg-stagger,0ms) + 120ms)}
+@keyframes pg-icon-pop{0%{transform:scale(.82)}70%{transform:scale(1.09)}100%{transform:scale(1)}}
+@media(max-width:600px){.pg-read-progress{height:3px}.nav-cta::after{opacity:.65}.trust-item.pg-visible,.audience-card.pg-visible,.topic-card.pg-visible,.age-card.pg-visible,.preview-card.pg-visible,.routine-card.pg-visible{animation-duration:.5s}.hero .rainbow-text{animation-duration:12s}}
+@media(prefers-reduced-motion:reduce){.nav-cta,.nav-cta::after,.hero .rainbow-text,.hero-purchase::before,.mid-offer::before,.trust-item.pg-visible,.audience-card.pg-visible,.topic-card.pg-visible,.age-card.pg-visible,.preview-card.pg-visible,.routine-card.pg-visible,.early-proof-card.pg-visible,.trust-item.pg-visible .trust-icon,.audience-card.pg-visible>span{animation:none!important}.pg-read-progress{transition:none}}

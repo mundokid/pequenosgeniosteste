@@ -100,3 +100,13 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('pg-visible');observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:'0px 0px 40px 0px'});
  targets.forEach(el=>{el.classList.add('pg-scroll-reveal');observer.observe(el)});
 })();
+
+// Dinamismo leve: barra de leitura e entrada escalonada. Não toca no carrossel de depoimentos.
+(function(){
+ const bar=document.querySelector('.pg-read-progress');
+ if(bar){let ticking=false;const update=()=>{const max=document.documentElement.scrollHeight-innerHeight;const value=max>0?Math.min(1,Math.max(0,scrollY/max)):0;bar.style.transform='scaleX('+value+')';ticking=false};addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});addEventListener('resize',update,{passive:true});update()}
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const cards=document.querySelectorAll('.trust-item,.audience-card,.topic-card,.age-card,.preview-card,.routine-card');
+ const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add('pg-visible');observer.unobserve(entry.target)}}},{threshold:.07,rootMargin:'0px 0px -12px 0px'});
+ cards.forEach((el,i)=>{el.style.setProperty('--pg-stagger',((i%4)*85)+'ms');observer.observe(el)});
+})();
