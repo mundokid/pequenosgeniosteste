@@ -92,3 +92,11 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  document.querySelector('.voice-prev')?.addEventListener('click',()=>move(-1));
  document.querySelector('.voice-next')?.addEventListener('click',()=>move(1));
 })();
+
+// Entrada suave de seções ao rolar. Não modifica o carrossel de depoimentos.
+(function(){
+ const targets=document.querySelectorAll('.trust-item,.early-proof-card,.early-inclusion-inner,.section-heading,.inclusive-shell,.research-grid,.offer-box,.faq-list,.mid-offer');
+ if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('pg-visible');observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:'0px 0px 40px 0px'});
+ targets.forEach(el=>{el.classList.add('pg-scroll-reveal');observer.observe(el)});
+})();
