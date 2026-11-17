@@ -1,0 +1,10 @@
+SITE PEQUENOS GÊNIOS — ATUALIZAÇÃO DE CONVERSÃO
+
+Publique TODOS os arquivos desta pasta na mesma raiz do GitHub Pages.
+Checkout principal: https://pay.kiwify.com.br/qGfiEhh
+Pixel Meta: 967550679424125 (eventos PageView, ViewContent, InitiateCheckout).
+Purchase e itens dos order bumps devem ser rastreados pela integração Kiwify; não são inferidos pelo site.
+
+Amostra-gratis-6-atividades.pdf: 3 páginas do produto principal + 1 de Brincadeiras em Movimento + 1 de Minha Rotina Divertida + 1 de Pequenos Gênios das Emoções. Os três materiais complementares completos NÃO estão inclusos no produto principal e são oferecidos opcionalmente como order bumps.
+
+Após publicar, teste os botões, o download e o carrossel no seu celular.
